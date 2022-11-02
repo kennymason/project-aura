@@ -33,6 +33,9 @@ int lastButtonState = 0;
 unsigned long startSleepTimer = 0; // the time the delay started
 bool awake = false; // true if still waiting for delay to finish
 
+unsigned long redDelayStart = 0; // the time the delay started
+int page = 0;
+
 String currentColor = "none";
 
 void setup() {
@@ -77,7 +80,11 @@ void loop() {
   if (irrecv.decode(&results)){
     Serial.println(results.value);
 
-    if (results.value == ylwKey) {
+    if (results.value == redKey) {
+      onRed();
+    }
+
+    else if (results.value == ylwKey) {
       onYellow();
     }
 
@@ -92,7 +99,10 @@ void loop() {
     irrecv.resume();
   }
   
-  if (currentColor == "none" && awake) {
+  if (currentColor == "red") {
+    scrollRed();
+  }
+  else if (currentColor == "none" && awake) {
     r = (abs(sin(3.14*t/180)))*255;
     g = (abs(sin(3.14*(t + 60)/180)))*255;
     b = (abs(sin(3.14*(t + 120)/180)))*255;
@@ -201,4 +211,53 @@ void onBlue() {
 
   // setRGB and restart sleep timer
   wake();
+}
+
+void onRed() {
+  currentColor = "red";
+  
+  // setting LCD
+  redDelayStart = millis();
+  page = -1;
+  scrollRed();
+  
+  // setting LED
+  digitalWrite(red, HIGH);
+  digitalWrite(green, LOW);
+  digitalWrite(blue, LOW);
+  
+  // setRGB and restart sleep timer
+  wake();
+}
+
+void scrollRed() {
+  // setting LCD
+  r = (1)*255;
+  g = (0)*255;
+  b = (0)*255;
+
+  // unsigned subtraction is always positive, so even when millis() reaches its max (4,294,967,295)
+  // and resets to 0, (millis() - redDelayStart) >= 10000) will still always work
+  int dur = millis() - redDelayStart;
+  
+  if (page == -1 || (page != 0 && dur <= 7000)) {
+    lcd.setCursor(0,0);
+    lcd.send_string("   Stay Out!!   ");
+    lcd.setCursor(0,1);
+    lcd.send_string("                ");
+
+    page = 0;
+  }
+  else if (page != 1 && dur > 7000) {
+    lcd.setCursor(0,0);
+    lcd.send_string(" Or risk waking ");
+    lcd.setCursor(0,1);
+    lcd.send_string("    the bear.   ");
+
+    page = 1;
+  }
+  
+  if (dur >= 10000) {
+    redDelayStart = millis();
+  }
 }
