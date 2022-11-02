@@ -77,8 +77,16 @@ void loop() {
   if (irrecv.decode(&results)){
     Serial.println(results.value);
 
-    if (results.value == grnKey) {
+    if (results.value == ylwKey) {
+      onYellow();
+    }
+
+    else if (results.value == grnKey) {
       onGreen();
+    }
+
+    else if (results.value == bluKey) {
+      onBlue();
     }
 
     irrecv.resume();
@@ -129,6 +137,28 @@ void wake () {
   lcd.setRGB(r,g,b);
 }
 
+void onYellow() {
+  currentColor = "yellow";
+  
+  // setting LCD
+  lcd.setCursor(0,0);
+  lcd.send_string("   On a call.   ");
+  lcd.setCursor(0,1);
+  lcd.send_string("Or on the phone.");
+
+  // setting LED
+  digitalWrite(red, HIGH);
+  digitalWrite(green, HIGH);
+  digitalWrite(blue, LOW);
+  
+  r = (1)*255;
+  g = (0.3)*255;
+  b = (0)*255;
+
+  // setRGB and restart sleep timer
+  wake();
+}
+
 void onGreen() {
   currentColor = "green";
   
@@ -147,6 +177,28 @@ void onGreen() {
   g = (1)*255;
   b = (0)*255;
   
+  // setRGB and restart sleep timer
+  wake();
+}
+
+void onBlue() {
+  currentColor = "blue";
+  
+  // setting LCD
+  lcd.setCursor(0,0);
+  lcd.send_string("  Bedtime Boii  ");
+  lcd.setCursor(0,1);
+  lcd.send_string("   Goodnight!   ");
+
+  // setting LED
+  digitalWrite(blue, HIGH);
+  digitalWrite(red, LOW);
+  digitalWrite(green, LOW);
+  
+  r = (0.3)*255;
+  g = (0)*255;
+  b = (1)*255;
+
   // setRGB and restart sleep timer
   wake();
 }
