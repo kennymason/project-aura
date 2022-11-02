@@ -29,6 +29,10 @@ int counter = 0;
 int buttonState = 0;
 int lastButtonState = 0;
 
+// Delays
+unsigned long startSleepTimer = 0; // the time the delay started
+bool awake = false; // true if still waiting for delay to finish
+
 String currentColor = "none";
 
 void setup() {
@@ -62,6 +66,10 @@ void setup() {
   pinMode(red, OUTPUT);
   pinMode(green, OUTPUT);
   pinMode(blue, OUTPUT);
+
+  // Starting delay
+  startSleepTimer = millis();   // start delay
+  awake = true; // not finished yet
 }
 
 void loop() {
@@ -76,8 +84,49 @@ void loop() {
     irrecv.resume();
   }
   
+  if (currentColor == "none" && awake) {
+    r = (abs(sin(3.14*t/180)))*255;
+    g = (abs(sin(3.14*(t + 60)/180)))*255;
+    b = (abs(sin(3.14*(t + 120)/180)))*255;
+    t = t + 3;
+    lcd.setRGB(r,g,b);
+    
+    delay(110);
+  }
+  
+  if (awake && millis() - startSleepTimer >= 20000) {
+    sleep();
+  }
+  
+  // just until we hook up sensor
+  if (!awake && millis() - startSleepTimer >= 20000) {
+     wake();
+  }
+  
 //  // Delay a little bit to avoid bouncing
 //  delay(150);
+}
+
+void sleep () {
+  //  display Off
+  lcd.command(LCD_DISPLAYCONTROL | LCD_DISPLAYOFF);
+  lcd.setRGB(0, 0, 0);
+  
+  awake = false;
+  
+  // just until we hook up sensor
+  startSleepTimer = millis();
+}
+
+void wake () {
+  if (!awake) {
+    awake = true;
+    lcd.display();
+  }
+
+  startSleepTimer = millis();
+  
+  lcd.setRGB(r,g,b);
 }
 
 void onGreen() {
@@ -97,5 +146,7 @@ void onGreen() {
   r = (0)*255;
   g = (1)*255;
   b = (0)*255;
-  lcd.setRGB(r,g,b);
+  
+  // setRGB and restart sleep timer
+  wake();
 }
