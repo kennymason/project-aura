@@ -175,13 +175,6 @@
       "text": ["   On a call.   ", "Or on the phone."],
       "color": "BL_YELLOW"
     },
-    "stayOut": {
-      "default": false,
-      "ir_key": 16722645,
-      "text": ["   Stay Out!!   ", "                ", " Or risk waking ", "    the bear.   "],
-      "color": "BL_RED",
-      "scroll-timer": 5000
-    },
     "welcome": {
       "default": false,
       "ir_key": 16751205,
@@ -197,15 +190,9 @@
     "sleeping": {
       "default": false,
       "ir_key": 16753245,
-      "text": ["  Bedtime Boii  ", "   Goodnight!   "],
+      "text": ["  Bedtime!!!!!  ", "   Goodnight!   "],
       "color": "BL_BLUE",
       "sleep-timeout": 3600000
-    },
-    "exotic": {
-      "default": false,
-      "ir_key": 16734375,
-      "text": ["  Do Not Come   ", "    Inside!!!   "],
-      "color": "BL_PINK"
     },
     "occupied": {
       "default": false,
