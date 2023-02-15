@@ -1,0 +1,223 @@
+{
+  "files": {
+    "template": "script-template.ino",
+    "output": "privacy-light.ino"
+  },
+  "pins": {
+    "ir": 19,
+    "red": 9,
+    "green": 16,
+    "blue": 14
+  },
+  "colors": {
+    "BL_UNDEF": {
+      "led": {
+        "analog": true,
+        "blink": true,
+        "red": 255,
+        "green": 255,
+        "blue": 210
+      },
+      "lcd": {
+        "fade": true
+      }
+    },
+    "BL_RED": {
+      "led": {
+        "analog": false,
+        "blink": false,
+        "red": true,
+        "green": false,
+        "blue": false
+      },
+      "lcd": {
+        "fade": false,
+        "red": 1,
+        "green": 0,
+        "blue": 0
+      }
+    },
+    "BL_ORANGE": {
+      "led": {
+        "analog": false,
+        "blink": false,
+        "red": true,
+        "green": true,
+        "blue": false
+      },
+      "lcd": {
+        "fade": false,
+        "red": 1,
+        "green": 0.5,
+        "blue": 0
+      }
+    },
+    "BL_YELLOW": {
+      "led": {
+        "analog": false,
+        "blink": false,
+        "red": true,
+        "green": true,
+        "blue": false
+      },
+      "lcd": {
+        "fade": false,
+        "red": 1,
+        "green": 1,
+        "blue": 0
+      }
+    },
+    "BL_GREEN": {
+      "led": {
+        "analog": false,
+        "blink": false,
+        "red": false,
+        "green": true,
+        "blue": false
+      },
+      "lcd": {
+        "fade": false,
+        "red": 0,
+        "green": 1,
+        "blue": 0
+      }
+    },
+    "BL_BLUE": {
+      "led": {
+        "analog": false,
+        "blink": false,
+        "red": false,
+        "green": false,
+        "blue": true
+      },
+      "lcd": {
+        "fade": false,
+        "red": 0,
+        "green": 0,
+        "blue": 1
+      }
+    },
+    "BL_PURPLE": {
+      "led": {
+        "analog": false,
+        "blink": false,
+        "red": true,
+        "green": false,
+        "blue": true
+      },
+      "lcd": {
+        "fade": false,
+        "red": 1,
+        "green": 0,
+        "blue": 1
+      }
+    },
+    "BL_PINK": {
+      "led": {
+        "analog": false,
+        "blink": false,
+        "red": true,
+        "green": false,
+        "blue": true
+      },
+      "lcd": {
+        "fade": false,
+        "red": 1,
+        "green": 0,
+        "blue": 0.5
+      }
+    },
+    "BL_WHITE": {
+      "led": {
+        "analog": true,
+        "blink": false,
+        "red": 255,
+        "green": 255,
+        "blue": 210
+      },
+      "lcd": {
+        "red": 1,
+        "green": 1,
+        "blue": 1,
+        "fade": false
+      }
+    },
+    "BL_COLORS": {
+      "led": {
+        "analog": true,
+        "blink": false,
+        "red": 255,
+        "green": 255,
+        "blue": 210
+      },
+      "lcd": {
+        "fade": true
+      }
+    }
+  },
+  "presets": {
+    "power": {
+      "default": false,
+      "ir_key": 16712445
+    },
+    "helloWorld": {
+      "default": true,
+      "ir_key": null,
+      "text": [
+        "     Hello      ",
+        "      World!    "
+      ],
+      "color": "BL_UNDEF"
+    },
+    "onCall": {
+      "default": false,
+      "ir_key": 16718055,
+      "text": ["   On a call.   ", "Or on the phone."],
+      "color": "BL_YELLOW"
+    },
+    "stayOut": {
+      "default": false,
+      "ir_key": 16722645,
+      "text": ["   Stay Out!!   ", "                ", " Or risk waking ", "    the bear.   "],
+      "color": "BL_RED",
+      "scroll-timer": 5000
+    },
+    "welcome": {
+      "default": false,
+      "ir_key": 16751205,
+      "text": ["   Im Decent!   ", "  Come on in!   "],
+      "color": "BL_GREEN"
+    },
+    "available": {
+      "default": false,
+      "ir_key": 16755285,
+      "text": ["  Come on in!   ", "  But... knock  "],
+      "color": "BL_GREEN"
+    },
+    "sleeping": {
+      "default": false,
+      "ir_key": 16753245,
+      "text": ["  Bedtime Boii  ", "   Goodnight!   "],
+      "color": "BL_BLUE",
+      "sleep-timeout": 3600000
+    },
+    "exotic": {
+      "default": false,
+      "ir_key": 16734375,
+      "text": ["  Do Not Come   ", "    Inside!!!   "],
+      "color": "BL_PINK"
+    },
+    "occupied": {
+      "default": false,
+      "ir_key": 16718565,
+      "text": ["   Occupied!    ", "      Sorry     "],
+      "color": "BL_RED"
+    },
+    "vacant": {
+      "default": false,
+      "ir_key": 16720605,
+      "text": ["  Out of Office ", "  Be back soon! "],
+      "color": "BL_COLORS"
+    }
+  }
+}
