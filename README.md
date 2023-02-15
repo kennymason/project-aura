@@ -66,3 +66,6 @@ The included files give you the necessary tools to generate the script you will 
 ```python3 buildscript.py```
 
 You should now be able to upload the generated script directly to your arduino.
+
+## Sample
+You can find an example config.json file and a generated .ino file in `/sample`
